@@ -100,6 +100,7 @@ answerMap = {}
 # 	print(guessData['flag'])
 
 
+guesses = 0
 firstGuess = ["adieu", "byard", "chimp", "defog", "djake", "dwyka", "slonk", "quint", "azoxy", "revue"]
 
 for word in firstGuess:
@@ -107,21 +108,29 @@ for word in firstGuess:
 	s.sendall(json.dumps({"type": "guess",
 					"id": gameID,
 					"word": word}).encode('utf-8') + b"\n")
+	guesses += 1
+
 	#Read Response
 	guessResponse = s.recv(2000)
 	print(guessResponse)
 
 	#Extract Grades from response
-	guessData = json.loads(guessResponse)['guesses_marks']
+	guessData = guessResponse.decode('utf-8')
+	guessJson = json.load(guessData)
+	guessArray = guessJson['guesses']
+	guessMarks = guessArray[guesses - 1]['marks']
+	print(guessMarks)
+
+
 	print(guessData)
 	
 	#Compare word against response
 	i = 0
 	letterList = word.split()
 	while i < WordSize:
-			if guessData[i] == 2:
+			if guessMarks[i] == 2:
 				answerMap[i] = letterList[i]
-			if guessData[i] == 1:
+			if guessMarks[i] == 1:
 				answerList.append(letterList[i])
 			i+=1
 
@@ -129,5 +138,7 @@ print(answerList)
 print(answerMap)
 
 
-dict = {"type": "retry", "id": "foo", "guesses": [{ "word": "treat", "marks": [1, 0, 2, 2, 0]}, { "word": "sweat", "marks": [2, 0, 2, 2, 1]}]}
-arr = dict["guesses"]
+# dict = {"type": "retry", "id": "foo", "guesses": [{ "word": "treat", "marks": [1, 0, 2, 2, 0]}, { "word": "sweat", "marks": [2, 0, 2, 2, 1]}]}
+# arr = dict["guesses"]
+# marks = arr[1]["marks"]
+# print(marks)
