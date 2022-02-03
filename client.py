@@ -115,14 +115,10 @@ for word in firstGuess:
 	print(guessResponse)
 
 	#Extract Grades from response
-	guessData = guessResponse.decode('utf-8')
-	guessJson = json.load(guessData)
-	guessArray = guessJson['guesses']
+	guessArray = guessResponse['guesses']
+	print(guessArray)
 	guessMarks = guessArray[guesses - 1]['marks']
 	print(guessMarks)
-
-
-	print(guessData)
 	
 	#Compare word against response
 	i = 0
@@ -138,7 +134,7 @@ print(answerList)
 print(answerMap)
 
 
-# dict = {"type": "retry", "id": "foo", "guesses": [{ "word": "treat", "marks": [1, 0, 2, 2, 0]}, { "word": "sweat", "marks": [2, 0, 2, 2, 1]}]}
-# arr = dict["guesses"]
-# marks = arr[1]["marks"]
-# print(marks)
+dict = b'{"guesses":[{"word":"adieu","marks":[0,0,0,0,0]}],"id":"u3SXSrkyrm0Wjs0bjmu9","type":"retry"}\n'
+arr = dict["guesses"]
+marks = arr[1]["marks"]
+print(marks)
