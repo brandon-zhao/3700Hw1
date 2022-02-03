@@ -134,7 +134,7 @@ print(answerList)
 print(answerMap)
 
 
-dict = b'{"guesses":[{"word":"adieu","marks":[0,0,0,0,0]}],"id":"u3SXSrkyrm0Wjs0bjmu9","type":"retry"}\n'
-arr = dict["guesses"]
-marks = arr[1]["marks"]
-print(marks)
+# dict = b'{"guesses":[{"word":"adieu","marks":[0,0,0,0,0]}],"id":"u3SXSrkyrm0Wjs0bjmu9","type":"retry"}\n'
+# arr = dict["guesses"]
+# marks = arr[1]["marks"]
+# print(marks)
