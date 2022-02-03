@@ -46,8 +46,8 @@ print("Connected to host.")
 
 try:
 	introMessage = {"type": "hello",
-					"northeastern_username": args.Northeastern_username}.encode('ascii') + "\n"
-	s.sendall(json.dumps(introMessage))
+					"northeastern_username": args.Northeastern_username}.encode('ascii')
+	s.sendall(json.dumps(introMessage) + "\n")
 except:
 	print(introMessage)
 	print('Message send failed')
