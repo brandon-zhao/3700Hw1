@@ -73,7 +73,7 @@ while True:
 	for letter in aList:
 		s.sendall(json.dumps({"type": "guess",
 					"id": gameID,
-					"word": letter + letter + letter + letter + letter}).encode('utf-8'))
+					"word": letter + letter + letter + letter + letter}).encode('utf-8') + b"\n")
 		guessResponse = s.recv(2000)
 		print(guessResponse)
 		guessData = guessResponse['guesses']
@@ -87,7 +87,7 @@ while True:
 			s.sendall(json.dumps({"type": "guess",
 						"id": gameID,
 						"word": answerMap.get(1) + answerMap.get(2) + 
-						answerMap.get(3) + answerMap.get(4) + answerMap.get(5)}).encode('utf-8'))
+						answerMap.get(3) + answerMap.get(4) + answerMap.get(5)}).encode('utf-8') + b"\n")
 		if guessData['type'] == "bye":
 			print(guessData['flag'])
 			break
