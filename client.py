@@ -24,10 +24,6 @@ PORT = 27993
 if args.p is int:
 	PORT = args.p
 
-# list of words
-wordList = 
- 
-
 # Establish socket (TCP)
 try:
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
