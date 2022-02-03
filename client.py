@@ -66,9 +66,9 @@ while stream:
 print(startData)
 message = startData.decode("ascii")
 
-print("Recieved message %s" % startDecode)
+print("Recieved message %s" % message)
 
-startMessage = json.loads(startDecode)
+startMessage = json.loads(message)
 gameID = startMessage['id']
 
 alphabet_string = string.ascii_lowercase
