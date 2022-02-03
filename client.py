@@ -65,15 +65,18 @@ print(gameID)
 alphabet_string = string.ascii_lowercase
 aList = list(alphabet_string)
 
+# List that stores correct letters for final answer
+answerList= []
 # Map that stores the correct letter positioning for the final answer
 answerMap = {}
 
 # main loop
-while True:
+guessing = True
+while guessing:
 	for letter in aList:
 		s.sendall(json.dumps({"type": "guess",
 					"id": gameID,
-					"word": letter + letter + letter + letter + letter}).encode('utf-8') + b"\n")
+					"word": "adieu"}).encode('utf-8') + b"\n")
 		guessResponse = s.recv(2000)
 		print(guessResponse)
 		guessData = guessResponse['guesses']
@@ -84,14 +87,18 @@ while True:
 				answerMap[i] = letter
 			i+=1
 		if len(answerMap.keys) == 5:
-			s.sendall(json.dumps({"type": "guess",
-						"id": gameID,
-						"word": answerMap.get(1) + answerMap.get(2) + 
-						answerMap.get(3) + answerMap.get(4) + answerMap.get(5)}).encode('utf-8') + b"\n")
-		if guessData['type'] == "bye":
-			print(guessData['flag'])
-			break
-	break
+			guessing = False
+
+s.sendall(json.dumps({"type": "guess",
+			"id": gameID,
+			"word": answerMap.get(1) + answerMap.get(2) + 
+			answerMap.get(3) + answerMap.get(4) + answerMap.get(5)}).encode('utf-8') + b"\n")
+
+guessResponse = s.recv(2000)
+guessData = guessResponse['guesses']
+
+if guessData['type'] == "bye":
+	print(guessData['flag'])
 
 
 		
