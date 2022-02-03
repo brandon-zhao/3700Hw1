@@ -46,11 +46,12 @@ print("Connected to host.")
 
 try: 
 	s.sendall(json.dumps({"type": "hello",
-					"northeastern_username": args.Northeastern_username}).encode('ascii'))
+					"northeastern_username": args.Northeastern_username}).encode('ascii') + "\n")
 except:
 	print('Message send failed')
 	sys.exit
 
+print
 
 # Get game ID from start message
 startData = b''
