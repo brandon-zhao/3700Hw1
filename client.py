@@ -49,26 +49,18 @@ introMessage = {"type": "hello",
 s.sendall(json.dumps(introMessage).encode('utf-8') + b"\n")
 
 print(introMessage)
-print(s.recv(2000))
 
 # Get game ID from start message
-startData = b''
-stream = True
-
-while stream:
-	try:
-		startData += s.recv(1500)
-	except socket.error as e:
-		stream = False
-
-
+startData = s.recv(2000)
 print(startData)
-message = startData.decode("ascii")
+message = startData.decode("utf-8")
+print(b"Welcome message" + startData)
 
 print("Recieved message %s" % message)
 
 startMessage = json.loads(message)
 gameID = startMessage['id']
+print(gameID)
 
 alphabet_string = string.ascii_lowercase
 aList = list(alphabet_string)
@@ -82,8 +74,10 @@ while True:
 		s.sendall(json.dumps({"type": "guess",
 					"id": gameID,
 					"word": letter + letter + letter + letter + letter}).encode('utf-8'))
-		guessResponse = s.recv(1500)
+		guessResponse = s.recv(2000)
+		print(guessResponse)
 		guessData = guessResponse['guesses']
+		print(guessData)
 		i = 0
 		while i < WordSize:
 			if guessResponse[i] == 2:
