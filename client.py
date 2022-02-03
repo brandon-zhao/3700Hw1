@@ -46,7 +46,7 @@ print("Connected to host.")
 
 introMessage = {"type": "hello",
 				"northeastern_username": args.Northeastern_username}
-s.sendall(json.dumps(introMessage + "\n").encode('utf-8'))
+s.sendall(json.dumps(introMessage).encode('utf-8') + b"\n")
 
 print(introMessage)
 print(s.recv(2000))
