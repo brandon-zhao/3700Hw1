@@ -100,7 +100,7 @@ answerMap = {}
 # 	print(guessData['flag'])
 
 
-firstGuess = ["adie", "byard", "chimp", "defog", "djake", "dwyka", "slonk", "quint", "azoxy", "revue"]
+firstGuess = ["adieu", "byard", "chimp", "defog", "djake", "dwyka", "slonk", "quint", "azoxy", "revue"]
 
 for word in firstGuess:
 	# Send guess
