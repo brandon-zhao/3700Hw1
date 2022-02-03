@@ -113,9 +113,10 @@ for word in firstGuess:
 	#Read Response
 	guessResponse = s.recv(2000)
 	print(guessResponse)
+	guessMessage = guessResponse.decode("utf-8")
 
 	#Extract Grades from response
-	guessArray = guessResponse['guesses']
+	guessArray = guessMessage['guesses']
 	print(guessArray)
 	guessMarks = guessArray[guesses - 1]['marks']
 	print(guessMarks)
