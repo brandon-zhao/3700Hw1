@@ -129,3 +129,5 @@ print(answerList)
 print(answerMap)
 
 
+dict = {"type": "retry", "id": "foo", "guesses": [{ "word": "treat", "marks": [1, 0, 2, 2, 0]}, { "word": "sweat", "marks": [2, 0, 2, 2, 1]}]}
+arr = dict["guesses"]
