@@ -44,10 +44,12 @@ s.connect((HOST, PORT))
 
 print("Connected to host.")
 
-try: 
-	s.sendall(json.dumps({"type": "hello",
-					"northeastern_username": args.Northeastern_username}).encode('ascii') + "\n")
+try:
+	introMessage = {"type": "hello",
+					"northeastern_username": args.Northeastern_username}).encode('ascii') + "\n"
+	s.sendall(json.dumps(introMessage))
 except:
+	print(introMessage)
 	print('Message send failed')
 	sys.exit
 
