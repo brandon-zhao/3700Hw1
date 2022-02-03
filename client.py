@@ -24,6 +24,9 @@ PORT = 27993
 if args.p is int:
 	PORT = args.p
 
+# list of words
+wordList = 
+ 
 
 # Establish socket (TCP)
 try:
@@ -70,36 +73,63 @@ answerList= []
 # Map that stores the correct letter positioning for the final answer
 answerMap = {}
 
-# main loop
-guessing = True
-while guessing:
-	for letter in aList:
-		s.sendall(json.dumps({"type": "guess",
+# # main loop
+# guessing = True
+# while guessing:
+# 	for letter in aList:
+# 		s.sendall(json.dumps({"type": "guess",
+# 					"id": gameID,
+# 					"word": "adieu"}).encode('utf-8') + b"\n")
+# 		guessResponse = s.recv(2000)
+# 		print(guessResponse)
+# 		guessData = json.loads(guessResponse)['guesses_marks']
+# 		print(guessData)
+# 		i = 0
+# 		while i < WordSize:
+# 			if guessData[i] == 2:
+# 				answerMap[i] = letter
+# 			i+=1
+# 		if len(answerMap.keys) == 5:
+# 			guessing = False
+
+# s.sendall(json.dumps({"type": "guess",
+# 			"id": gameID,
+# 			"word": answerMap.get(1) + answerMap.get(2) + 
+# 			answerMap.get(3) + answerMap.get(4) + answerMap.get(5)}).encode('utf-8') + b"\n")
+
+# guessResponse = s.recv(2000)
+# guessData = guessResponse['guesses_marks']
+
+# if guessData['type'] == "bye":
+# 	print(guessData['flag'])
+
+
+firstGuess = ["adie", "byard", "chimp", "defog", "djake", "dwyka", "slonk", "quint", "azoxy", "revue"]
+
+for word in firstGuess:
+	# Send guess
+	s.sendall(json.dumps({"type": "guess",
 					"id": gameID,
-					"word": "adieu"}).encode('utf-8') + b"\n")
-		guessResponse = s.recv(2000)
-		print(guessResponse)
-		guessData = guessResponse['guesses']
-		print(guessData)
-		i = 0
-		while i < WordSize:
-			if guessResponse[i] == 2:
-				answerMap[i] = letter
+					"word": word}).encode('utf-8') + b"\n")
+	#Read Response
+	guessResponse = s.recv(2000)
+	print(guessResponse)
+
+	#Extract Grades from response
+	guessData = json.loads(guessResponse)['guesses_marks']
+	print(guessData)
+	
+	#Compare word against response
+	i = 0
+	letterList = word.split()
+	while i < WordSize:
+			if guessData[i] == 2:
+				answerMap[i] = letterList[i]
+			if guessData[i] == 1:
+				answerList.append(letterList[i])
 			i+=1
-		if len(answerMap.keys) == 5:
-			guessing = False
 
-s.sendall(json.dumps({"type": "guess",
-			"id": gameID,
-			"word": answerMap.get(1) + answerMap.get(2) + 
-			answerMap.get(3) + answerMap.get(4) + answerMap.get(5)}).encode('utf-8') + b"\n")
+print(answerList)
+print(answerMap)
 
-guessResponse = s.recv(2000)
-guessData = guessResponse['guesses']
-
-if guessData['type'] == "bye":
-	print(guessData['flag'])
-
-
-		
 
