@@ -44,16 +44,12 @@ s.connect((HOST, PORT))
 
 print("Connected to host.")
 
-try:
-	introMessage = {"type": "hello",
-					"northeastern_username": args.Northeastern_username}
-	s.sendall(json.dumps(introMessage + "\n").encode('utf-8'))
-except:
-	print(introMessage)
-	print('Message send failed')
-	sys.exit
+introMessage = {"type": "hello",
+				"northeastern_username": args.Northeastern_username}
+s.sendall(json.dumps(introMessage + "\n").encode('utf-8'))
 
-print
+print(introMessage)
+print(s.recv(2000))
 
 # Get game ID from start message
 startData = b''
